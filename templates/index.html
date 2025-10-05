@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-center mb-5">Painel da Cidade Inteligente</h2>
+
+<div class="row text-center">
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h4 class="card-title">Sensores</h4>
+            <p class="display-6">{{ total_sensores }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h4 class="card-title">Câmeras</h4>
+            <p class="display-6">{{ total_cameras }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h4 class="card-title">Ocorrências</h4>
+            <p class="display-6">{{ total_ocorrencias }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h4 class="card-title">Serviços</h4>
+            <p class="display-6">{{ total_servicos }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

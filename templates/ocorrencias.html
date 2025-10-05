@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Ocorrências</h3>
+    <a href="{{ url_for('nova_ocorrencia') }}" class="btn btn-primary">+ Nova Ocorrência</a>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Nível</th>
+            <th>Status</th>
+            <th>Data/Hora</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in ocorrencias %}
+        <tr>
+            <td>{{ o.id_ocorrencia }}</td>
+            <td>{{ o.titulo }}</td>
+            <td>{{ o.descricao }}</td>
+            <td>{{ o.nivel_criticidade }}</td>
+            <td>{{ o.status }}</td>
+            <td>{{ o.timestamp_ocorrencia.strftime('%d/%m/%Y %H:%M') if o.timestamp_ocorrencia else '' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

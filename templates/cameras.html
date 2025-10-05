@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Câmeras</h3>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Modelo</th>
+            <th>Rua</th>
+            <th>Resolução</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cameras %}
+        <tr>
+            <td>{{ c.id_camera }}</td>
+            <td>{{ c.modelo }}</td>
+            <td>{{ c.id_rua }}</td>
+            <td>{{ c.resolucao }}</td>
+            <td>{{ c.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

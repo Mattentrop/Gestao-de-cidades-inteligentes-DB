@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Serviços Executados</h3>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Status</th>
+            <th>Observações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in servicos %}
+        <tr>
+            <td>{{ s.id_servico_executado }}</td>
+            <td>{{ s.id_tipo_servico }}</td>
+            <td>{{ s.data_inicio }}</td>
+            <td>{{ s.data_fim }}</td>
+            <td>{{ s.status }}</td>
+            <td>{{ s.observacoes }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,33 @@
+body {
+    background-color: #0e1117;
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    background-color: #12141d !important;
+}
+
+.nav-link, .navbar-brand {
+    color: #00d4ff !important;
+    font-weight: 500;
+}
+
+.card {
+    background-color: #1a1e29;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.1);
+}
+
+.card-title {
+    color: #00d4ff;
+}
+
+.table {
+    color: #e0e0e0;
+}
+
+.table thead {
+    background-color: #1f2430;
+}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Sensores</h3>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Rua</th>
+            <th>Status</th>
+            <th>Data de Instalação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in sensores %}
+        <tr>
+            <td>{{ s.id_sensor }}</td>
+            <td>{{ s.id_tipo_sensor }}</td>
+            <td>{{ s.id_rua }}</td>
+            <td>{{ s.status }}</td>
+            <td>{{ s.data_instalacao }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
