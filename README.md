@@ -7,7 +7,6 @@ Este é um sistema web desenvolvido em Flask para gerenciar ocorrências, sensor
 Antes de começar, você precisará ter instalado em sua máquina:
 * [Git](https://git-scm.com/)
 * [Python 3.10+](https://www.python.org/)
-* [PostgreSQL](https://www.postgresql.org/) (um banco de dados relacional)
 
 ## 🚀 Guia de Instalação e Execução
 
@@ -41,33 +40,22 @@ Com o ambiente virtual ativado, instale todas as bibliotecas necessárias:
 pip install -r requirements.txt
 ```
 
-### 4. Configure o Banco de Dados PostgreSQL
+### 4. Configure a Conexão com o Banco de Dados
 
-Você precisa criar um banco de dados e os tipos `ENUM` customizados que a aplicação utiliza.
+Este projeto utiliza um banco de dados PostgreSQL centralizado que está hospedado em um VPS. **Você não precisa criar o banco de dados, os tipos ou as tabelas**, apenas configurar a conexão.
 
-a. Abra o terminal do `psql` ou sua ferramenta de banco de dados preferida.
+**a. Solicite as Credenciais de Acesso**
 
-b. Crie um banco de dados para o projeto (ex: `smartcity_db`).
-```sql
-CREATE DATABASE smartcity_db;
-```
+Peça ao administrador do projeto (Matheus) as informações de conexão com o banco de dados:
+* Host (Endereço IP do VPS)
+* Porta (normalmente 5432)
+* Nome do Banco de Dados
+* Usuário
+* Senha
 
-c. Conecte-se ao banco recém-criado e execute os comandos abaixo para criar os tipos `ENUM`:
-```sql
--- Conecte-se com: \c smartcity_db
+**b. Crie o Arquivo de Configuração Local**
 
-CREATE TYPE public.criticidade_ocorrencia AS ENUM
-    ('baixo', 'médio', 'alto');
-
-CREATE TYPE public.status_ocorrencia AS ENUM
-    ('aberta', 'em_atendimento', 'resolvida', 'cancelada');
-```
-
-### 5. Configure a Conexão com o Banco de Dados
-
-A aplicação precisa saber como se conectar ao banco de dados através de um arquivo de configuração.
-
-a. Faça uma cópia do arquivo `config.py.example` e renomeie-a para `config.py`:
+Faça uma cópia do arquivo `config.py.example` e renomeie-a para `config.py`:
 ```bash
 # No Windows (usando copy)
 copy config.py.example config.py
@@ -76,25 +64,21 @@ copy config.py.example config.py
 cp config.py.example config.py
 ```
 
-b. Abra o arquivo `config.py` e edite a variável `SQLALCHEMY_DATABASE_URI` com suas credenciais do PostgreSQL. Por exemplo:
+**c. Preencha o Arquivo de Configuração**
+
+Abra o arquivo `config.py` e edite a variável `SQLALCHEMY_DATABASE_URI` com as credenciais que você recebeu.
+
+O formato é: `"postgresql://USUARIO:SENHA@HOST:PORTA/NOME_DO_BANCO"`
+
+**Exemplo:**
 ```python
-SQLALCHEMY_DATABASE_URI = "postgresql://postgres:minha_senha_123@localhost:5432/smartcity_db"
+SQLALCHEMY_DATABASE_URI = "postgresql://dev_user:senha_secreta_123@192.168.1.100:5432/smartcity_db_dev"
 ```
 
-### 6. Crie as Tabelas no Banco
+### 5. Execute a Aplicação!
 
-Para criar todas as tabelas no banco de dados a partir dos modelos SQLAlchemy, execute o seguinte comando:
-
-```bash
-python create_tables.py
-```
-*(Este passo assume que existe um script `create_tables.py` no projeto para inicializar o banco).*
-
-
-### 7. Execute a Aplicação!
-
-Finalmente, inicie o servidor de desenvolvimento do Flask:
+Com a configuração pronta, inicie o servidor de desenvolvimento do Flask:
 ```bash
 python app.py
 ```
-Acesse a aplicação no seu navegador em: **http://12.0.0.1:5000**
+A aplicação irá se conectar ao banco de dados no VPS. Acesse-a no seu navegador em: **http://127.0.0.1:5000**
