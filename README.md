@@ -36,7 +36,7 @@ source venv/bin/activate
 
 ### 3. Instale as Dependências
 
-Com o ambiente virtual ativado, instale todas as bibliotecas necessárias com um único comando:
+Com o ambiente virtual ativado, instale todas as bibliotecas necessárias:
 ```bash
 pip install -r requirements.txt
 ```
@@ -63,46 +63,33 @@ CREATE TYPE public.status_ocorrencia AS ENUM
     ('aberta', 'em_atendimento', 'resolvida', 'cancelada');
 ```
 
-### 5. Configure as Variáveis de Ambiente
+### 5. Configure a Conexão com o Banco de Dados
 
-A aplicação precisa saber como se conectar ao banco de dados.
+A aplicação precisa saber como se conectar ao banco de dados através de um arquivo de configuração.
 
-a. Copie o arquivo de exemplo `.env.example` para um novo arquivo chamado `.env`:
+a. Faça uma cópia do arquivo `config.py.example` e renomeie-a para `config.py`:
 ```bash
 # No Windows (usando copy)
-copy .env.example .env
+copy config.py.example config.py
 
 # No Linux/macOS (usando cp)
-cp .env.example .env
+cp config.py.example config.py
 ```
 
-b. Abra o arquivo `.env` e edite as variáveis com as suas credenciais do PostgreSQL. Por exemplo:
-```
-DATABASE_URL="postgresql://postgres:minha_senha_123@localhost:5432/smartcity_db"
-SECRET_KEY="qualquer-string-aleatoria-e-segura"
+b. Abra o arquivo `config.py` e edite a variável `SQLALCHEMY_DATABASE_URI` com suas credenciais do PostgreSQL. Por exemplo:
+```python
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:minha_senha_123@localhost:5432/smartcity_db"
 ```
 
 ### 6. Crie as Tabelas no Banco
 
-Para criar todas as tabelas no banco de dados a partir dos modelos definidos no `app.py`, execute o script de criação.
+Para criar todas as tabelas no banco de dados a partir dos modelos SQLAlchemy, execute o seguinte comando:
 
-*(Observação: Se você não tiver um script separado, pode ser necessário adicionar uma função temporária ao seu app ou criá-lo via terminal Python).*
-
-Uma forma simples de criar um script para isso (ex: `create_tables.py`):
-```python
-# create_tables.py
-from app import app, db
-
-with app.app_context():
-    print("Criando tabelas...")
-    db.create_all()
-    print("Tabelas criadas com sucesso!")
-
-```
-Execute o script:
 ```bash
 python create_tables.py
 ```
+*(Este passo assume que existe um script `create_tables.py` no projeto para inicializar o banco).*
+
 
 ### 7. Execute a Aplicação!
 
@@ -110,6 +97,4 @@ Finalmente, inicie o servidor de desenvolvimento do Flask:
 ```bash
 python app.py
 ```
-Acesse a aplicação no seu navegador em: **http://127.0.0.1:5000**
-
-Pronto! Agora qualquer pessoa que clonar seu repositório terá um guia completo para rodar o projeto.
+Acesse a aplicação no seu navegador em: **http://12.0.0.1:5000**
